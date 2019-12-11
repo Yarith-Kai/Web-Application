@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Add_new";
+}
+
+<h2>Add New Employee</h2>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" />
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age" placeholder="Age" />
+        </div>
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" placeholder="State" />
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" placeholder="Country" />
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add()">Add</button>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    function Add() {
+        var empObj = {
+            Name: $('#name').val(),
+            Age: $('#age').val(),
+            State: $('#state').val(),
+            Country: $('#country').val()
+        };
+        $.ajax({
+            url: "/Employee/Add",
+            data: JSON.stringify(empObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                window.location.href = "Index";
+            }
+        });
+    }
+</script>
+
